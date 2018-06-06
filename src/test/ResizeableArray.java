@@ -2,9 +2,12 @@ package com.test;
 
 public class ResizeableArray<T> {
 	
+	static final int DEFAULT_INITIAL_CAPACITY = 16;
+    static final int MAXIMUM_CAPACITY = 1 << 30;
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;
 	@SuppressWarnings("unchecked")
 	ResizeableArray(){
-		this.arr = new Node[10];
+		this.arr = new Node[DEFAULT_INITIAL_CAPACITY];
 	}
 	private Node arr[];
 	private Node temp;
@@ -15,7 +18,7 @@ public class ResizeableArray<T> {
 
 	@SuppressWarnings("unchecked")
 	Node[] resizeArray(){
-		if(this.arr.length==0) this.arr = new Node[10];
+		if(this.arr.length==0) this.arr = new Node[DEFAULT_INITIAL_CAPACITY];
 		int len = this.arr.length;
 		Node[] a =  new Node[2*len];
 		System.arraycopy(arr, 0, a, 0, len-1);
@@ -80,12 +83,10 @@ public class ResizeableArray<T> {
 			root.data= key;
 			return root;
 		}
-
 		if ((int)key < (int)root.data)
 			root.left = insertRec(root.left, key);
 		else if ((int)key > (int)root.data)
 			root.right = insertRec(root.right, key);
-
 		return root;
 	}
 
